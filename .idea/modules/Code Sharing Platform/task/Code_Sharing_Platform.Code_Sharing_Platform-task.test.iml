@@ -25,8 +25,8 @@
     <orderEntry type="module" module-name="Code_Sharing_Platform.util.test" production-on-test="" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-actuator:2.5.6" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-web:2.5.6" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-freemarker:2.5.6" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter:2.5.6" level="project" />
-    <orderEntry type="library" name="Gradle: org.freemarker:freemarker:2.3.31" level="project" />
     <orderEntry type="library" name="Gradle: org.jsoup:jsoup:1.13.1" level="project" />
     <orderEntry type="library" name="Gradle: com.github.hyperskill:hs-test:release-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-actuator-autoconfigure:2.5.6" level="project" />
@@ -35,6 +35,8 @@
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-tomcat:2.5.6" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework:spring-webmvc:5.3.12" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework:spring-web:5.3.12" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework:spring-context-support:5.3.12" level="project" />
+    <orderEntry type="library" name="Gradle: org.freemarker:freemarker:2.3.31" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-autoconfigure:2.5.6" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot:2.5.6" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-logging:2.5.6" level="project" />

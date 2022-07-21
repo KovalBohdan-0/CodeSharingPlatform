@@ -1,24 +1,5 @@
 type: edu
 files:
-- name: src/platform/CodeSharingPlatform.java
-  visible: true
-  text: |
-    package platform;
-
-    import org.springframework.boot.SpringApplication;
-    import org.springframework.boot.autoconfigure.SpringBootApplication;
-    import org.springframework.web.bind.annotation.RestController;
-
-    @SpringBootApplication
-    @RestController
-    public class CodeSharingPlatform {
-
-        public static void main(String[] args) {
-            SpringApplication.run(CodeSharingPlatform.class, args);
-        }
-
-    }
-  learner_created: false
 - name: build.gradle
   visible: true
   learner_created: false
@@ -392,6 +373,40 @@ files:
         }
     }
   learner_created: false
+- name: src/platform/Code.java
+  visible: true
+  text: |
+    package platform;
+
+    import java.time.LocalDateTime;
+    import java.time.format.DateTimeFormatter;
+
+    public class Code {
+        private String code;
+        private String date;
+
+        public Code(String code) {
+            this.code = code;
+            this.date = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss").format(LocalDateTime.now());
+        }
+
+        public String getCode() {
+            return code;
+        }
+
+        public void setCode(String code) {
+            this.code = code;
+        }
+
+        public String getDate() {
+            return date;
+        }
+
+        public void setDate(String date) {
+            this.date = date;
+        }
+    }
+  learner_created: true
 - name: src/platform/CodeController.java
   visible: true
   text: |
@@ -476,40 +491,37 @@ files:
         }
     }
   learner_created: true
-- name: src/platform/Code.java
+- name: src/platform/CodeSharingPlatform.java
   visible: true
   text: |
     package platform;
 
-    import java.time.LocalDateTime;
-    import java.time.format.DateTimeFormatter;
+    import org.springframework.boot.SpringApplication;
+    import org.springframework.boot.autoconfigure.SpringBootApplication;
+    import org.springframework.web.bind.annotation.RestController;
 
-    public class Code {
-        private String code;
-        private String date;
+    @SpringBootApplication
+    @RestController
+    public class CodeSharingPlatform {
 
-        public Code(String code) {
-            this.code = code;
-            this.date = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss").format(LocalDateTime.now());
+        public static void main(String[] args) {
+            SpringApplication.run(CodeSharingPlatform.class, args);
         }
 
-        public String getCode() {
-            return code;
-        }
-
-        public void setCode(String code) {
-            this.code = code;
-        }
-
-        public String getDate() {
-            return date;
-        }
-
-        public void setDate(String date) {
-            this.date = date;
-        }
     }
+  learner_created: false
+- name: src/resources/templates/latest.ftlh
+  visible: true
+  learner_created: true
+- name: src/resources/templates/code.ftlh
+  visible: true
+  learner_created: true
+- name: src/resources/templates/addCode.ftlh
+  visible: true
   learner_created: true
 feedback_link: https://hyperskill.org/learn/step/11029#comment
-status: Unchecked
-record: -1
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Thu, 21 Jul 2022 08:32:33 UTC
+record: 3

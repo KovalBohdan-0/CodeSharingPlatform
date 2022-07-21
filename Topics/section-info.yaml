@@ -2,3 +2,5 @@ content:
 - LocalTime
 - LocalDate
 - LocalDateTime
+- Anonymous classes
+- Default methods

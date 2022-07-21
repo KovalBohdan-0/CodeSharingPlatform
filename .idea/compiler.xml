@@ -9,6 +9,10 @@
       <module name="Code_Sharing_Platform.Code_Sharing_Platform-task-build-test-results.main" target="11" />
       <module name="Code_Sharing_Platform.Code_Sharing_Platform-task-build-tmp.main" target="11" />
       <module name="Code_Sharing_Platform.Code_Sharing_Platform-task.main" target="11" />
+      <module name="Code_Sharing_Platform.Topics-Anonymous_classes-Single_method.main" target="11" />
+      <module name="Code_Sharing_Platform.Topics-Anonymous_classes-Theory.main" target="11" />
+      <module name="Code_Sharing_Platform.Topics-Default_methods-Resolve_a_diamond_problem.main" target="11" />
+      <module name="Code_Sharing_Platform.Topics-Default_methods-Theory.main" target="11" />
       <module name="Code_Sharing_Platform.Topics-LocalDate-2_weeks_after.main" target="11" />
       <module name="Code_Sharing_Platform.Topics-LocalDate-Theory.main" target="11" />
       <module name="Code_Sharing_Platform.Topics-LocalDateTime-Add_11_hours_and_print_the_date.main" target="11" />

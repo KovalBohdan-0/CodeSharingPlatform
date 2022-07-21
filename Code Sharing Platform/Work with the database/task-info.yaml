@@ -446,6 +446,187 @@ files:
         }
     }
   learner_created: false
+- name: src/platform/CodeController.java
+  visible: true
+  text: |
+    package platform;
+
+    import com.fasterxml.jackson.core.JsonProcessingException;
+    import com.fasterxml.jackson.databind.ObjectMapper;
+    import org.springframework.stereotype.Controller;
+    import org.springframework.ui.Model;
+    import org.springframework.web.bind.annotation.*;
+
+    import java.util.ArrayList;
+    import java.util.Map;
+
+    //@RestController
+    @Controller
+    public class CodeController {
+        private final ArrayList<Code> codes = new ArrayList<>();
+        private final String codeString = "public static void main(String[] args) {\n" +
+                "        SpringApplication.run(CodeSharingPlatform.class, args);\n" +
+                "    }";
+        private Code code = new Code(codeString);
+
+        @GetMapping("/code/{id}")
+        public String getCode(@PathVariable String id, Model model) {
+            model.addAttribute("code", codes.get(Integer.parseInt(id) - 1));
+            return "code";
+        }
+
+        @GetMapping("/code/latest")
+        public String getLatest(Model model) {
+            ArrayList<Code> sortedCodes = new ArrayList<>();
+            int maxLength = 10;
+
+            if (codes.size() < 10) {
+                maxLength = codes.size();
+            }
+
+            for (int i = codes.size() - 1; i >= Math.abs(codes.size()-maxLength); i--) {
+                sortedCodes.add(codes.get(i));
+            }
+
+            model.addAttribute("codes", sortedCodes);
+
+            return "latest";
+        }
+
+        @ResponseBody
+        @GetMapping("/code/new")
+        public String addCode() {
+            String htmlResponse = "<html>\n" +
+                    "<head>\n" +
+                    "<script>" +
+                    "function send() {\n" +
+                    "    let object = {\n" +
+                    "        \"code\": document.getElementById(\"code_snippet\").value\n" +
+                    "    };\n" +
+                    "    \n" +
+                    "    let json = JSON.stringify(object);\n" +
+                    "    \n" +
+                    "    let xhr = new XMLHttpRequest();\n" +
+                    "    xhr.open(\"POST\", '/api/code/new', false)\n" +
+                    "    xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');\n" +
+                    "    xhr.send(json);\n" +
+                    "    \n" +
+                    "    if (xhr.status == 200) {\n" +
+                    "      alert(\"Success!\");\n" +
+                    "    }\n" +
+                    "}" +
+                    "</script>" +
+                    "<title>Create</title>\n" +
+                    "</head>\n" +
+                    "<body>\n" +
+                    "<textarea id=\"code_snippet\"></textarea>" +
+                    "<button id=\"send_snippet\" type=\"submit\" onclick=\"send()\">Submit</button>" +
+                    "</body>\n" +
+                    "</html>";
+
+            return htmlResponse;
+        }
+
+        @ResponseBody
+        @GetMapping("/api/code/{id}")
+        public Code getApiCode(@PathVariable String id) {
+            if (Integer.parseInt(id) - 1 < codes.size()) {
+                return codes.get(Integer.parseInt(id) - 1);
+            }
+            return null;
+        }
+
+        @ResponseBody
+        @PostMapping("/api/code/new")
+        public String newCode(@RequestBody String jsonString) throws JsonProcessingException {
+            Map<String, String> codeValue = new ObjectMapper().readValue(jsonString, Map.class);
+            Code code = new Code(codeValue.get("code"));
+            codes.add(code);
+            this.code = code;
+
+            return String.format("{id:'%s'}", codes.size());
+        }
+
+        @ResponseBody
+        @GetMapping("/api/code/latest")
+        public ArrayList<Code> getApiLatest() {
+            ArrayList<Code> sortedCodes = new ArrayList<>();
+            int maxLength = 10;
+
+            if (codes.size() < 10) {
+                maxLength = codes.size();
+            }
+
+            for (int i = codes.size() - 1; i >= Math.abs(codes.size()-maxLength); i--) {
+                sortedCodes.add(codes.get(i));
+            }
+
+            return sortedCodes;
+        }
+    }
+  learner_created: true
+- name: src/resources/templates/code.ftlh
+  visible: true
+  text: |-
+    <html>
+    <head>
+        <title>Code</title>
+    </head>
+    <body>
+        <span id='load_date'>${code.date}</span>
+        <pre id='code_snippet'>${code.code}</pre>
+    </body>
+    </html>
+  learner_created: true
+- name: src/platform/Code.java
+  visible: true
+  text: |
+    package platform;
+
+    import java.time.LocalDateTime;
+    import java.time.format.DateTimeFormatter;
+
+    public class Code {
+        private String code;
+        private String date;
+
+        public Code(String code) {
+            this.code = code;
+            this.date = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss").format(LocalDateTime.now());
+        }
+
+        public String getCode() {
+            return code;
+        }
+
+        public void setCode(String code) {
+            this.code = code;
+        }
+
+        public String getDate() {
+            return date;
+        }
+
+        public void setDate(String date) {
+            this.date = date;
+        }
+    }
+  learner_created: true
+- name: src/resources/templates/latest.ftlh
+  visible: true
+  text: |-
+    <html>
+        <head>
+            <title>Latest</title>
+        </head>
+        <body>
+            <#list codes as code>
+            <span id='load_date'>${code.date}</span>
+            <pre id='code_snippet'>${code.code}</pre>
+            </#list>
+        </body>
+    </html>
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/11030#comment
 status: Unchecked
-record: -1
+record: 4
